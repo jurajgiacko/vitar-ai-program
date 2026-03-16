@@ -429,11 +429,15 @@
 
         .divider { height: 1px; background: var(--border); margin: 32px 0; }
 
-        .dl-btn {
+        .dl-btn-group {
             position: fixed;
             top: 16px;
             right: 20px;
             z-index: 100;
+            display: flex;
+            gap: 8px;
+        }
+        .dl-btn {
             display: inline-flex;
             align-items: center;
             gap: 6px;
@@ -452,13 +456,17 @@
         @media (max-width: 768px) {
             .sidebar { display: none; }
             .main { margin-left: 0; padding: 24px 16px 60px; }
-            .dl-btn { top: 10px; right: 10px; font-size: 0.72rem; padding: 6px 12px; }
+            .dl-btn-group { top: 10px; right: 10px; flex-direction: column; gap: 4px; }
+            .dl-btn { font-size: 0.72rem; padding: 6px 12px; }
         }
     </style>
 </head>
 <body>
 
-    <a href="AI-PROGRAM.md" download class="dl-btn">⬇ Stáhnout .md</a>
+    <div class="dl-btn-group">
+        <a href="AI-PROGRAM.md" download class="dl-btn">⬇ Program .md</a>
+        <a href="EU-RESEARCH.md" download class="dl-btn" style="background:var(--purple);color:#fff;">⬇ EU Research .md</a>
+    </div>
 
     <!-- SIDEBAR -->
     <nav class="sidebar">
