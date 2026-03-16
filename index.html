@@ -552,7 +552,7 @@
                 <div class="mc-num">7</div>
                 <div>
                     <div class="mc-title">Plán & budget</div>
-                    <div class="mc-desc">Prvních 30 dní s dátumy. Budget. ROI. Co od IT.</div>
+                    <div class="mc-desc">Kickoff → Weekly AI Committee → iterace. Budget. ROI. Co od IT.</div>
                 </div>
                 <div class="mc-badge ready">Dostupné</div>
             </div>
@@ -755,6 +755,10 @@
             <h1>Modul 2: Nástroje & Stack</h1>
             <p class="subtitle">Žádný ChatGPT Teams. Pořádné nástroje, které mění způsob práce.</p>
 
+            <div class="warn" style="padding:20px;margin-bottom:20px;">
+                <strong style="color:var(--red);">Přestaňte používat free verzie.</strong> Free ChatGPT, free Gemini — uživatelé pak nechápou rozdíl a říkají „AI mi nic nedává." Rozdíl mezi free a Pro je jako mezi Škodou 105 a Teslou. <strong>Buď Pro, nebo vůbec.</strong>
+            </div>
+
             <h3>Pro buildování</h3>
             <div class="tool-row">
                 <div>
@@ -762,6 +766,13 @@
                     <div class="tool-desc">AI editor. Vidí vaše soubory. Píše kód, generuje weby, reporty, prezentace. <strong>To hlavní.</strong></div>
                 </div>
                 <div class="tool-price" style="color:var(--purple);">$20/měs</div>
+            </div>
+            <div class="tool-row">
+                <div>
+                    <div class="tool-name">Claude Code (CLI)</div>
+                    <div class="tool-desc">Terminálový AI agent od Anthropic. Builduje, refaktoruje, testuje. Alternativa/doplněk ke Cursoru — <strong>testujte oba, zvolte co sedne.</strong></div>
+                </div>
+                <div class="tool-price" style="color:var(--purple);">v ceně Claude Max</div>
             </div>
             <div class="tool-row">
                 <div>
@@ -773,9 +784,16 @@
             <div class="tool-row">
                 <div>
                     <div class="tool-name">Vercel</div>
-                    <div class="tool-desc">Hosting. 1 klik z GitHubu = live web. Testovací i produkční prostředí.</div>
+                    <div class="tool-desc">Hosting front-end. 1 klik z GitHubu = live web.</div>
                 </div>
                 <div class="tool-price" style="color:var(--green);">zdarma</div>
+            </div>
+            <div class="tool-row">
+                <div>
+                    <div class="tool-name">Railway</div>
+                    <div class="tool-desc">Hosting back-end + databáze. Alternativa k Vercel pro složitější appy.</div>
+                </div>
+                <div class="tool-price" style="color:var(--green);">free tier / $5+</div>
             </div>
 
             <h3>Pro každodenní práci</h3>
@@ -811,11 +829,23 @@
             </div>
 
             <div class="info">
-                <strong>Testovací účty (schváleno Tomášem 11.3.):</strong> Registrace přes <code>ai-devel@vitar.cz</code>. 3 předplatná na 1 měsíc. Po 2 týdnech rozhodnutí o jmenných účtech.
+                <strong>Testovací účty (schváleno Tomášem 11.3.):</strong> Registrace přes <code>ai-devel@vitar.cz</code>. Využívejte max free trial (Cursor 14 dní, Claude 7 dní...) — <strong>než zaplatíte, musí si to sedět.</strong>
             </div>
 
             <div class="highlight">
                 <strong>Lovable:</strong> No-code prototyping. Dá se napojit na GitHub (auto-sync), ale nechová se agenticky — proto přechod na Cursor pro seriózní vývoj.
+            </div>
+
+            <h3>Trial strategie & měsíční review</h3>
+            <div class="card" style="border-left:3px solid var(--orange);">
+                <p class="gray" style="margin-bottom:12px;">Nedělejte velké commity. Neplatťe roční licence „do zásoby." Každý měsíc review:</p>
+                <div style="font-size:0.88rem;color:var(--gray);">
+                    <div style="margin-bottom:8px;">1. <strong style="color:var(--text);">Trial first:</strong> Cursor 14-day trial, Claude free tier, Railway free tier — <em>vyzkoušej, než koupíš.</em></div>
+                    <div style="margin-bottom:8px;">2. <strong style="color:var(--text);">Cursor vs. Claude Code:</strong> Každý power user testuje oba. Po 2 týdnech: <em>co ti sedne víc?</em> Nemusíme mít jeden tool pro všechny.</div>
+                    <div style="margin-bottom:8px;">3. <strong style="color:var(--text);">Měsíční review:</strong> Na weekly AI committee <strong>každý měsíc zhodnotit</strong> — přináší nástroj hodnotu? Kolik hodin ušetřil? Pokud ne → switch.</div>
+                    <div style="margin-bottom:8px;">4. <strong style="color:var(--text);">Kreativní AI zvlášť:</strong> Artlist, Koda, Midjourney — testovat měsíčně. Kreativní nástroje se mění nejrychleji.</div>
+                </div>
+                <p style="font-size:0.82rem;color:var(--red);margin-top:12px;"><strong>Pravidlo: žádná licence přežije víc než 3 měsíce bez review. Pokud nepřináší value → zrušit, switchnout.</strong></p>
             </div>
 
             <h3>Hardware — bez toho to nepojede</h3>
@@ -1082,9 +1112,19 @@
                 <strong style="color:var(--blue);">Kapacita (Radim, 11.3.):</strong> Potřebujeme vychovat někoho interně — <strong>2–3 hodiny denně pravidelně</strong>, ne „když je trochu času." Zvažujeme i externího IT specialistu na part-time (kontakt od Kamila Škrobaly).
             </div>
 
-            <div class="highlight">
-                <strong>AI Zlín:</strong> Radim se přihlásí do lokální AI komunity (25 CZK/rok). Diskuzní fóra, spolupráce s firmami. Kontakt: Honza Vlk — AI obchodník.
+            <h3>Kde se učit — ne spolky, ale světoví lídři</h3>
+            <p class="gray" style="margin-bottom:12px;">Místo lokálních AI spolků se učme od lidí, kteří AI staví denně. Kurzy, komunity a zdroje od těch nejlepších:</p>
+            <div class="card" style="border-left:3px solid var(--blue);">
+                <div style="font-size:0.88rem;color:var(--gray);">
+                    <div style="margin-bottom:10px;"><span style="color:var(--blue);font-weight:700;">Lovable Academy</span> — kurzy no-code AI prototypingu, reálné buildování produktů. Skvělé pro non-dev lidi.</div>
+                    <div style="margin-bottom:10px;"><span style="color:var(--purple);font-weight:700;">Aibility</span> — AI implementace pro firmy. Praktické frameworky, case studies, workshopy.</div>
+                    <div style="margin-bottom:10px;"><span style="color:var(--green);font-weight:700;">AIFirst</span> — komunita a kurzy zaměřené na AI-first mindset. Jak přetvořit firemní procesy.</div>
+                    <div style="margin-bottom:10px;"><span style="color:var(--orange);font-weight:700;">Cursor 101 / YouTube</span> — best practices od power userů. Jak správně nastavit rules, context, workflow.</div>
+                    <div style="margin-bottom:10px;"><span style="color:var(--accent);font-weight:700;">Anthropic Cookbook / OpenAI Guides</span> — oficiální zdroje od tvůrců modelů. Prompt engineering, best practices.</div>
+                    <div><span style="color:var(--gray);font-weight:700;">Y Combinator / Build in Public</span> — sledovat, jak startupy buildí s AI v reálném čase.</div>
+                </div>
             </div>
+            <p style="font-size:0.82rem;color:var(--red);"><strong>Lokální spolky můžou pomoct s networkingem, ale skill buildit světovými zdroji.</strong></p>
         </div>
 
         <!-- MODULE 6: JAK ZAČÍT -->
@@ -1170,12 +1210,22 @@
                 </div>
             </div>
 
-            <div class="tool-row">
-                <div><div class="tool-name" style="font-size:0.88rem;">AI Morning Coffee — út 9:00, 15 min</div><div class="tool-desc">Champion ukáže 1 workflow. Celý tým se učí od sebe, ne od jednoho člověka.</div></div>
-                <div style="font-size:0.72rem;color:var(--green);font-weight:700;">TÝDNĚ</div>
+            <div style="background:rgba(76,175,80,0.08);border:2px solid rgba(76,175,80,0.3);border-radius:12px;padding:20px 24px;margin:12px 0;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                    <div>
+                        <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--green);margin-bottom:4px;">SHOWCASE & INSPIRACE</div>
+                        <div class="tool-name">Bi-weekly AI Coffee</div>
+                    </div>
+                    <div style="font-size:0.72rem;color:var(--green);font-weight:700;">KAŽDÉ 2 TÝDNY</div>
+                </div>
+                <div class="tool-desc" style="font-size:0.88rem;color:var(--text);">
+                    <strong>Celý AI tým + zájemci.</strong> 20 min, neformální.<br>
+                    Kdo co udělal. Top workflow za 2 týdny. „Hele, tohle mi ušetřilo 4 hodiny." Showcase, ne přednáška.<br>
+                    <strong>Formát:</strong> 2–3 lidi ukáží screenshare co buildili / co se naučili → diskuze → tip týdne.
+                </div>
             </div>
             <div class="tool-row">
-                <div><div class="tool-name" style="font-size:0.88rem;">AI Review — poslední pá, 45 min</div><div class="tool-desc">Tomáš + Radim + Juraj. Metriky, budget, bezpečnost, strategický pohled.</div></div>
+                <div><div class="tool-name" style="font-size:0.88rem;">AI Review — poslední pá, 45 min</div><div class="tool-desc">Tomáš + Radim + Juraj. Metriky, budget review nástrojů, bezpečnost, strategický pohled.</div></div>
                 <div style="font-size:0.72rem;color:var(--purple);font-weight:700;">MĚSÍC</div>
             </div>
 
@@ -1188,29 +1238,33 @@
         <div class="module-section" id="m7">
             <a class="back-link" onclick="showModule('overview')">← Přehled programu</a>
             <h1>Modul 7: Plán & budget</h1>
-            <p class="subtitle">Prvních 30 dní s dátumy. Co potřebujeme od IT. Kolik to stojí.</p>
+            <p class="subtitle">Kickoff → Weekly AI Committee → iterace. Žádný rigidní 30-dňový plán. Posouváme se tam, kam nás zavede weekly sync.</p>
 
             <h3>Co potřebujeme od IT — teď</h3>
             <p class="gray" style="margin-bottom:12px;">4 věci. Nic z toho se nenapojuje na firemní servery. IT (Dalibora) zapojíme až s funkčním prototypem.</p>
-            <div class="tool-row"><div><div class="tool-name" style="font-size:0.88rem;">Cursor</div><div class="tool-desc">Povolit instalaci na 3–5 PC. Desktop app, nulový přístup k serveru.</div></div><div style="font-size:0.72rem;color:var(--red);font-weight:700;">HNED</div></div>
+            <div class="tool-row"><div><div class="tool-name" style="font-size:0.88rem;">Cursor / Claude Code</div><div class="tool-desc">Povolit instalaci na 3–5 PC. Desktop app, nulový přístup k serveru.</div></div><div style="font-size:0.72rem;color:var(--red);font-weight:700;">HNED</div></div>
             <div class="tool-row"><div><div class="tool-name" style="font-size:0.88rem;">GitHub org</div><div class="tool-desc">Založit "vitar-group". Webový nástroj, není na serveru.</div></div><div style="font-size:0.72rem;color:var(--red);font-weight:700;">HNED</div></div>
-            <div class="tool-row"><div><div class="tool-name" style="font-size:0.88rem;">Webové služby</div><div class="tool-desc">Vercel, Neon, Firebase. Testovací, oddělené od firemního.</div></div><div style="font-size:0.72rem;color:var(--orange);font-weight:700;">BŘEZEN</div></div>
+            <div class="tool-row"><div><div class="tool-name" style="font-size:0.88rem;">Webové služby</div><div class="tool-desc">Vercel, Railway, Neon, Firebase. Testovací, oddělené od firemního.</div></div><div style="font-size:0.72rem;color:var(--orange);font-weight:700;">BŘEZEN</div></div>
             <div class="tool-row"><div><div class="tool-name" style="font-size:0.88rem;">Admin práva</div><div class="tool-desc">Pro Tier 1 vývojáře — instalace Cursor, terminál. Jen na dev strojích.</div></div><div style="font-size:0.72rem;color:var(--orange);font-weight:700;">BŘEZEN</div></div>
 
-            <h3>Prvních 30 dní</h3>
-            <div class="timeline-item"><div class="timeline-date">17.3.</div><div class="timeline-text"><strong>Digi meeting</strong> — schválit framework, role, IT požadavky</div></div>
-            <div class="timeline-item"><div class="timeline-date">17.3.</div><div class="timeline-text"><strong>Tomáš: Loom tutoriál</strong> — Cursor → GitHub → Code flow</div></div>
-            <div class="timeline-item"><div class="timeline-date">18.3.</div><div class="timeline-text"><strong>Dan: GitHub org</strong> "vitar-group" + private repos + pozvat tým</div></div>
-            <div class="timeline-item"><div class="timeline-date">18.3.</div><div class="timeline-text"><strong>Dan: testovací účty</strong> ai-devel@vitar.cz + Gemini, Artlist, Koda</div></div>
-            <div class="timeline-item"><div class="timeline-date">18.3.</div><div class="timeline-text"><strong>Teams kanál</strong> AI @ VITAR — připnout pravidla</div></div>
-            <div class="timeline-item"><div class="timeline-date">T3</div><div class="timeline-text"><strong>Tomáš: kontakt IT spec.</strong> od Kamila Škrobaly — part-time podpora</div></div>
-            <div class="timeline-item"><div class="timeline-date">T3</div><div class="timeline-text"><strong>Radim: AI Zlín</strong> — přihlásit se, Honza Vlk (AI obchodník)</div></div>
-            <div class="timeline-item"><div class="timeline-date">T3</div><div class="timeline-text"><strong>Rozhodnutí: kalkulačka</strong> — Lovable nebo Cursor?</div></div>
-            <div class="timeline-item"><div class="timeline-date">T3</div><div class="timeline-text"><strong>Workshop #1</strong> — 5–8 lidí, hands-on 2h</div></div>
-            <div class="timeline-item"><div class="timeline-date">31.3.</div><div class="timeline-text"><strong>IT schválí</strong> Cursor + GitHub pro Tier 1</div></div>
-            <div class="timeline-item"><div class="timeline-date">T4</div><div class="timeline-text"><strong>AI Morning Coffee #1</strong> — champion ukáže workflow</div></div>
-            <div class="timeline-item"><div class="timeline-date">T4</div><div class="timeline-text"><strong>Workshop #2</strong> — dalších 5–8 lidí</div></div>
-            <div class="timeline-item"><div class="timeline-date">11.4.</div><div class="timeline-text"><strong>AI Review #1</strong> — Tomáš + Radim + Juraj</div></div>
+            <h3>Kickoff akce — tohle spustit hned</h3>
+            <p class="gray" style="margin-bottom:12px;">Nedáváme rigidní 30-dňový plán. Spustíme tyto akce a pak iterujeme na <strong>Weekly AI Committee</strong>.</p>
+            <div class="timeline-item"><div class="timeline-date">HNED</div><div class="timeline-text"><strong>🔴 Vykopnout Weekly AI Committee Sync</strong> — fixní slot, Tomáš + Radim + Juraj + AI tým. Tohle je motor všetkého.</div></div>
+            <div class="timeline-item"><div class="timeline-date">HNED</div><div class="timeline-text"><strong>Teams kanál</strong> AI @ VITAR — připnout pravidla, tento program, AI Use Policy</div></div>
+            <div class="timeline-item"><div class="timeline-date">HNED</div><div class="timeline-text"><strong>Tomáš: Loom tutoriál</strong> — Cursor → GitHub → Code flow</div></div>
+            <div class="timeline-item"><div class="timeline-date">T12</div><div class="timeline-text"><strong>Dan: GitHub org</strong> "vitar-group" + private repos + pozvat tým</div></div>
+            <div class="timeline-item"><div class="timeline-date">T12</div><div class="timeline-text"><strong>Dan: testovací účty</strong> ai-devel@vitar.cz + free trial Cursor/Claude Code/Gemini</div></div>
+            <div class="timeline-item"><div class="timeline-date">T12</div><div class="timeline-text"><strong>Tomáš: kontakt IT spec.</strong> od Kamila Škrobaly — part-time podpora</div></div>
+
+            <div class="divider"></div>
+
+            <h3>Kam dál? Rozhodne Weekly AI Committee.</h3>
+            <p class="gray" style="margin-bottom:12px;">Nemáme fixní roadmapu na 6 měsíců. Na každém weekly syncu vyhodnotíme, co funguje, a posuneme se dál. Příklady toho, co přijde:</p>
+            <div class="timeline-item"><div class="timeline-date">~T3-4</div><div class="timeline-text"><strong>Workshop #1</strong> — 5–8 lidí, hands-on 2h (Cursor / Claude Code)</div></div>
+            <div class="timeline-item"><div class="timeline-date">~T4</div><div class="timeline-text"><strong>Bi-weekly AI Coffee #1</strong> — kdo co udělal, showcase, tip týdne</div></div>
+            <div class="timeline-item"><div class="timeline-date">~M2</div><div class="timeline-text"><strong>AI Review #1</strong> — Tomáš + Radim + Juraj. Metriky, budget review nástrojů</div></div>
+            <div class="timeline-item"><div class="timeline-date">~M2</div><div class="timeline-text"><strong>Rozhodnutí: Cursor vs. Claude Code</strong> — co sedne komu? Kdo potřebuje co?</div></div>
+            <div class="timeline-item"><div class="timeline-date">~M3</div><div class="timeline-text"><strong>Měsíční review nástrojů</strong> — přináší licence value? Switch / cancel neefektivních</div></div>
 
             <div class="budget-box">
                 <div class="budget-number">~22 000 CZK/měs</div>
@@ -1224,9 +1278,13 @@
             <a class="back-link" onclick="showModule('overview')">← Přehled programu</a>
             <h1>Často kladené otázky</h1>
 
+            <div class="card" style="border-left:3px solid var(--red);">
+                <h3 style="margin-top:0;">Proč nemůžu zůstat na free verzi?</h3>
+                <p class="gray">Free ChatGPT / free Gemini = starší modely, omezený kontext, pomalé odpovědi, žádné pokročilé funkce. Uživatelé pak říkají „AI mi nic nedává" — protože pracují s demo verzí. <strong>Rozdíl mezi free a Pro je jako mezi kalkulačkou a Excelem.</strong> Buď Pro, nebo nic. Proto investujeme do licencí.</p>
+            </div>
             <div class="card">
                 <h3 style="margin-top:0;">Můžu používat ChatGPT?</h3>
-                <p class="gray">Můžeš, ale nebude to nic moc. ChatGPT nevidí vaše soubory. Cursor ano. Rozdíl je v tom, že místo kopírování tam a zpátky AI pracuje přímo s vaším projektem.</p>
+                <p class="gray">Můžeš (Pro verzi), ale nebude to nic moc pro buildování. ChatGPT nevidí vaše soubory. Cursor / Claude Code ano. Rozdíl je v tom, že místo kopírování tam a zpátky AI pracuje přímo s vaším projektem.</p>
             </div>
             <div class="card">
                 <h3 style="margin-top:0;">Co když nevím, jestli můžu dát data do AI?</h3>
@@ -1247,7 +1305,7 @@
         </div>
 
         <div style="text-align:center;color:var(--muted);font-size:0.72rem;margin-top:40px;padding-top:24px;border-top:1px solid var(--border);">
-            AI @ VITAR · v3.0 · 16. březen 2026 · Zdroj: meeting 11.3.2026 + EU deep research (McKinsey, OECD, Eurostat)
+            AI @ VITAR · v4.0 · 16. březen 2026 · Zdroj: meeting 11.3.2026 + EU deep research (McKinsey, OECD, Eurostat)
         </div>
     </div>
 
