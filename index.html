@@ -451,10 +451,10 @@
 
         <div class="sidebar-section">Moduly</div>
         <div class="sidebar-item" onclick="showModule('m1')">
-            <span class="num">1</span> AI Mindset
+            <span class="num">1</span> AI Mindset & urgence
         </div>
         <div class="sidebar-item" onclick="showModule('m2')">
-            <span class="num">2</span> Nástroje & Stack
+            <span class="num">2</span> Nástroje & Hardware
         </div>
         <div class="sidebar-item" onclick="showModule('m3')">
             <span class="num">3</span> Dvě kategorie
@@ -503,16 +503,16 @@
             <div class="module-card current" onclick="showModule('m1')">
                 <div class="mc-num">1</div>
                 <div>
-                    <div class="mc-title">AI Mindset — proč jinak</div>
-                    <div class="mc-desc">Přestaňte kopírovat do ChatGPT. Jak to vypadá, když AI vidí vaše soubory.</div>
+                    <div class="mc-title">AI Mindset — proč musíme šlapat</div>
+                    <div class="mc-desc">Kurzy nestačí. GymBeam má AI agenty. My řešíme, jestli používat Cursor. Ten gap roste.</div>
                 </div>
                 <div class="mc-badge current">Start zde</div>
             </div>
             <div class="module-card" onclick="showModule('m2')">
                 <div class="mc-num">2</div>
                 <div>
-                    <div class="mc-title">Nástroje & Stack</div>
-                    <div class="mc-desc">Cursor, GitHub, Vercel, Claude, Gemini, kreativní AI. Co používáme a proč.</div>
+                    <div class="mc-title">Nástroje, Stack & Hardware</div>
+                    <div class="mc-desc">Cursor, GitHub, Vercel, Claude, kreativní AI. Plus: jaké stroje potřebujeme.</div>
                 </div>
                 <div class="mc-badge ready">Dostupné</div>
             </div>
@@ -566,15 +566,27 @@
         <div class="module-section" id="m1">
             <a class="back-link" onclick="showModule('overview')">← Přehled programu</a>
             <h1>Modul 1: AI Mindset</h1>
-            <p class="subtitle">Proč kopírování do ChatGPT není AI. A co dělat místo toho.</p>
+            <p class="subtitle">Nestačí být AI-curious. Musíme být AI-first. A musíme začít teď.</p>
+
+            <div class="warn" style="padding:24px;">
+                <h3 style="color:var(--red);margin:0 0 10px;">Kde jsme vs. kde bychom měli být</h3>
+                <p style="font-size:0.9rem;margin-bottom:12px;">Absolvovali jsme kurzy. Máme licence. Ale <strong>reálně AI používá pár lidí, pár hodin týdně, na pár věcí.</strong> To nestačí.</p>
+                <p style="font-size:0.9rem;margin-bottom:12px;"><strong>GymBeam má 2 OpenClaw boty</strong>, které jim autonomně vymýšlejí produkty. Konkurence neřeší, jestli „má smysl používat Cursor" — oni už mají AI agenty, kteří pracují 24/7.</p>
+                <p style="font-size:0.9rem;margin:0;">My se pořád bavíme o tom, <strong>jestli</strong> — oni už řeší <strong>jak škálovat</strong>. Ten gap se každý měsíc zvětšuje.</p>
+            </div>
 
             <div class="wrong">
-                <div class="label">Takhle to dělá většina firem</div>
-                <p style="font-size:0.9rem;">Otevřít ChatGPT → zkopírovat text → dostat odpověď → zkopírovat zpátky → ručně opravit, protože AI neměla kontext → opakovat. Po měsíci pocit: „fajn, ale nic zásadního."</p>
+                <div class="label">Co děláme teď (a nestačí to)</div>
+                <p style="font-size:0.9rem;">Otevřít ChatGPT → zkopírovat text → dostat odpověď → zkopírovat zpátky → ručně opravit. Kurzy proběhly, ale nedaly lidem <strong>nástroje v ruce</strong> — daly jim teorii. Výsledek: „AI je fajn, ale nic zásadního."</p>
             </div>
             <div class="right">
-                <div class="label">Takhle to budeme dělat my</div>
-                <p style="font-size:0.9rem;">AI vidí přímo vaše soubory. Řeknete <em>„Udělej z tohohle report"</em> — a ona to udělá. Řeknete <em>„Vygeneruj HTML prezentaci z těchto dat"</em> — za 30 minut hotový web. <strong>Kontext > prompty.</strong></p>
+                <div class="label">AI-first mindset</div>
+                <p style="font-size:0.9rem;">AI vidí přímo vaše soubory. Řeknete <em>„Udělej z tohohle report"</em> — a ona to udělá. AI není doplněk workflow. <strong>AI je workflow.</strong> Každý nový úkol začíná otázkou: „Jak to udělá AI?" Ne: „Mám na to čas?"</p>
+            </div>
+
+            <div class="highlight" style="background:rgba(245,166,35,0.1);border-color:rgba(245,166,35,0.3);">
+                <h3 style="color:var(--accent);margin:0 0 8px;">Hledáme Power Users</h3>
+                <p style="font-size:0.88rem;margin:0;">Nepotřebujeme, aby 100 lidí používalo ChatGPT na emaily. Potřebujeme <strong>5–10 lidí, kteří budou v AI žít</strong> — buildovat, zkoušet, lámat věci, ukazovat ostatním. Lidé, kteří sami chtějí. Ne ti, které musíme přesvědčovat. Pokud jsi ten člověk — ozvi se.</p>
             </div>
 
             <h3>Co už dnes funguje</h3>
@@ -676,6 +688,28 @@
             <div class="highlight">
                 <strong>Lovable:</strong> No-code prototyping. Dá se napojit na GitHub (auto-sync), ale nechová se agenticky — proto přechod na Cursor pro seriózní vývoj.
             </div>
+
+            <h3>Hardware — bez toho to nepojede</h3>
+            <p class="gray" style="margin-bottom:12px;">AI nástroje (Cursor, lokální modely, velké projekty) potřebují <strong>výkonné stroje</strong>. Na starém notebooku s 8 GB RAM se v Cursoru nedá seriózně pracovat.</p>
+
+            <div class="warn">
+                <strong style="color:var(--red);">AI ambasádoři / Power Users potřebují:</strong>
+                <ul style="margin:10px 0 0 20px;font-size:0.88rem;">
+                    <li><strong>Min. 16 GB RAM</strong> (ideálně 32 GB) — Cursor + prohlížeč + lokální server</li>
+                    <li><strong>SSD</strong> — rychlý disk, ne HDD</li>
+                    <li><strong>Moderní CPU</strong> — Apple M-series nebo Intel 12th gen+</li>
+                    <li><strong>Dedikovaná GPU</strong> (nice-to-have) — pro lokální AI modely, generování vizuálů</li>
+                </ul>
+            </div>
+
+            <div class="info">
+                <strong>Radim (11.3.):</strong> Máme dvouslotový server, GPU karty se dají dokoupit — teď o 30 % levněji. Zvážit, jestli dimenzovat infrastrukturu na lokální AI. Ale nejdřív koncept — <em>pak</em> hardware.
+            </div>
+
+            <div class="card">
+                <h3 style="margin-top:0;">Pravidlo: správný stroj = správný člověk</h3>
+                <p class="gray">Nedávejme silné stroje všem. Dávejme je <strong>power userům, kteří dokazují, že je využijí</strong>. Workshop absolvován, showcase ukázán, workflow sdílen → dostaneš lepší setup. Metrika: kolik hodin AI ušetřila / měsíc.</p>
+            </div>
         </div>
 
         <!-- MODULE 3: DVĚ KATEGORIE -->
@@ -713,6 +747,64 @@
 
             <div class="warn">
                 <strong style="color:var(--red);">⚠ Riziko (Tomáš, 11.3.):</strong> „Někdo si postaví Cursor bot na firemním počítači, napojí na firemní složky — a jsme v prdeli." Proto dvě kategorie. Proto scope dokument. Proto sandbox.
+            </div>
+
+            <h3>Mapa: co kde běží</h3>
+            <p class="gray" style="margin-bottom:12px;">Jasný přehled — kde Cursor, kde GitHub, kde firemní data. Žádné šedé zóny.</p>
+
+            <div class="card" style="overflow-x:auto;">
+                <table style="width:100%;font-size:0.82rem;border-collapse:collapse;">
+                    <thead>
+                        <tr style="border-bottom:2px solid var(--border);">
+                            <th style="text-align:left;padding:8px 12px;color:var(--accent);">Co dělám</th>
+                            <th style="text-align:left;padding:8px 12px;">Kde</th>
+                            <th style="text-align:left;padding:8px 12px;">Data</th>
+                            <th style="text-align:left;padding:8px 12px;">Schválení</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom:1px solid var(--border);">
+                            <td style="padding:8px 12px;">Email, překlad, research</td>
+                            <td style="padding:8px 12px;"><strong>Claude / Gemini</strong> (web)</td>
+                            <td style="padding:8px 12px;color:var(--green);">Veřejná</td>
+                            <td style="padding:8px 12px;">Nadřízený</td>
+                        </tr>
+                        <tr style="border-bottom:1px solid var(--border);">
+                            <td style="padding:8px 12px;">Prezentace, HTML, bannery</td>
+                            <td style="padding:8px 12px;"><strong>Cursor</strong> → <strong>GitHub</strong> → Vercel</td>
+                            <td style="padding:8px 12px;color:var(--green);">Veřejná / brand</td>
+                            <td style="padding:8px 12px;">Žádné</td>
+                        </tr>
+                        <tr style="border-bottom:1px solid var(--border);">
+                            <td style="padding:8px 12px;">Vizuály, produktové fotky</td>
+                            <td style="padding:8px 12px;"><strong>Artlist / Koda / Gemini</strong></td>
+                            <td style="padding:8px 12px;color:var(--green);">Veřejná</td>
+                            <td style="padding:8px 12px;">Nadřízený</td>
+                        </tr>
+                        <tr style="border-bottom:1px solid var(--border);">
+                            <td style="padding:8px 12px;">Interní app (ALFA)</td>
+                            <td style="padding:8px 12px;"><strong>Cursor</strong> → <strong>GitHub</strong> → <strong>Vercel</strong> + testovací DB</td>
+                            <td style="padding:8px 12px;color:var(--orange);">Testovací (fake)</td>
+                            <td style="padding:8px 12px;">Scope doc → Tomáš + Radim</td>
+                        </tr>
+                        <tr style="border-bottom:1px solid var(--border);">
+                            <td style="padding:8px 12px;">Interní app (BETA)</td>
+                            <td style="padding:8px 12px;"><strong>GitHub</strong> → <strong>Devel server</strong></td>
+                            <td style="padding:8px 12px;color:var(--orange);">Testovací DB z SQL</td>
+                            <td style="padding:8px 12px;">Code review + OWASP + sign-off</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:8px 12px;">Interní app (LIVE)</td>
+                            <td style="padding:8px 12px;"><strong>GitHub</strong> → <strong>Produkční server</strong></td>
+                            <td style="padding:8px 12px;color:var(--red);">Firemní DB (živá)</td>
+                            <td style="padding:8px 12px;">Radim sign-off + monitoring</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="info">
+                <strong>Klíčový princíp:</strong> Cursor nikdy přímo na firemním serveru. Cursor → GitHub (kód). GitHub → Vercel (testování). Teprve po review → devel server → produkce. Data a kód jsou <strong>vždy oddělené</strong> až do fáze LIVE.
             </div>
 
             <p class="gray" style="margin-top:16px;"><strong style="color:var(--text);">Nevíte?</strong> Zeptejte se v Teams kanálu AI @ VITAR. Lepší se zeptat než dát recepturu do AI.</p>
