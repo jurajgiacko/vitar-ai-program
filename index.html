@@ -596,55 +596,126 @@
             </div>
 
             <h3>Jak to dělají firmy v EU</h3>
-            <p class="gray" style="margin-bottom:12px;">Z deep research: „Škálování AI adopce v SMB firmách s 10–50+ zaměstnanci v Evropě" (Eurostat 2025, McKinsey, OECD, OpenAI).</p>
+            <p class="gray" style="margin-bottom:12px;">Z deep research: „Škálování AI adopce v SMB firmách 70–100 zaměstnanců v Evropě" (Eurostat 2025, McKinsey, OECD, OpenAI leadership guide).</p>
 
             <div class="card" style="border-left:3px solid var(--accent);">
                 <div class="tool-name" style="margin-bottom:6px;">GymBeam (SK/CZ, ~500 zaměstnanců)</div>
                 <p class="gray" style="margin:0;">2 OpenClaw boty, které autonomně vymýšlejí produkty. AI není doplněk — je to core business proces. Začínali stejně jako my. Dnes mají AI agenty pracující 24/7.</p>
             </div>
-            <div class="card" style="border-left:3px solid var(--green);">
-                <div class="tool-name" style="margin-bottom:6px;">Nejúspěšnější EU firmy: 7 společných znaků</div>
-                <ol style="font-size:0.85rem;margin:0;padding-left:20px;color:var(--gray);">
-                    <li><strong style="color:var(--text);">CEO sponsor a jasné „proč teď"</strong> — bez toho se nic nepohne <span style="color:var(--green);">✅ máme</span></li>
-                    <li><strong style="color:var(--text);">Jedna lehká governance vrstva</strong> — ne enterprise board, ale jasná pravidla <span style="color:var(--orange);">⚡ budujeme</span></li>
-                    <li><strong style="color:var(--text);">Start v business support procesech</strong> — ne ve výrobě, ale v sales, marketingu, CS <span style="color:var(--green);">✅ děláme</span></li>
-                    <li><strong style="color:var(--text);">Champions network</strong> — 1 ochotný člověk na tým <span style="color:var(--orange);">⚡ identifikujeme</span></li>
-                    <li><strong style="color:var(--text);">Měření adopce i hodnoty</strong> — WAU, workflow count, hodinová úspora</li>
-                    <li><strong style="color:var(--text);">Standardizace</strong> — prompty → šablony → integrace</li>
-                    <li><strong style="color:var(--text);">Human-in-the-loop</strong> u všeho s obchodním/právním dopadem</li>
-                </ol>
-            </div>
+
+            <!-- MODEL 1: Hub-and-Spoke -->
             <div class="card" style="border-left:3px solid var(--purple);">
-                <div class="tool-name" style="margin-bottom:6px;">3 fáze adopce (OpenAI leadership guide)</div>
-                <div style="display:flex;gap:12px;flex-wrap:wrap;">
-                    <div style="flex:1;min-width:160px;padding:12px;background:rgba(76,175,80,0.08);border-radius:8px;">
-                        <div style="font-size:0.72rem;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:1px;">Fáze 1</div>
-                        <div style="font-size:0.85rem;margin-top:4px;"><strong>Fluency</strong> — každý ví, jak AI použít pro svou práci</div>
-                        <div style="font-size:0.75rem;color:var(--accent);margin-top:4px;">← JSME ZDE</div>
+                <div class="tool-name" style="margin-bottom:6px;">Model 1: Hub-and-Spoke pro SMB (McKinsey)</div>
+                <p style="font-size:0.85rem;color:var(--gray);margin-bottom:10px;">Pro firmu 70–100 lidí nejlepší default. McKinsey ukazuje, že governance a risk bývají centralizované, zatímco adopce use-casů funguje hybridně.</p>
+                <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:10px;">
+                    <div style="flex:1;min-width:200px;padding:12px;background:rgba(124,77,255,0.08);border-radius:8px;">
+                        <div style="font-size:0.72rem;font-weight:700;color:var(--purple);text-transform:uppercase;">Hub (2–4 lidi)</div>
+                        <div style="font-size:0.82rem;margin-top:4px;">CEO sponsor, AI owner, IT/data owner. Řeší: policy, schválené nástroje, bezpečnost, přístup k datům, KPI.</div>
                     </div>
-                    <div style="flex:1;min-width:160px;padding:12px;background:rgba(26,127,212,0.08);border-radius:8px;">
-                        <div style="font-size:0.72rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:1px;">Fáze 2</div>
-                        <div style="font-size:0.85rem;margin-top:4px;"><strong>Workflow</strong> — AI je zabudované do standardních nástrojů a SOP</div>
-                    </div>
-                    <div style="flex:1;min-width:160px;padding:12px;background:rgba(124,77,255,0.08);border-radius:8px;">
-                        <div style="font-size:0.72rem;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:1px;">Fáze 3</div>
-                        <div style="font-size:0.85rem;margin-top:4px;"><strong>Agents</strong> — vybrané procesy agentizované s human-in-the-loop</div>
+                    <div style="flex:1;min-width:200px;padding:12px;background:rgba(76,175,80,0.08);border-radius:8px;">
+                        <div style="font-size:0.72rem;font-weight:700;color:var(--green);text-transform:uppercase;">Spokes (5–7 championů)</div>
+                        <div style="font-size:0.82rem;margin-top:4px;">1 champion v sales, CS, finance, operations, marketing, HR. Redesign workflow + adoption v týmu.</div>
                     </div>
                 </div>
-                <p class="gray" style="margin-top:10px;font-size:0.82rem;">Bez fluency a governance se agenti mění na drahé demo. Nejdřív musí lidi umět, pak teprve automatizovat.</p>
+                <p style="font-size:0.82rem;color:var(--red);margin:0;"><strong>Kdy selhává:</strong> Když hub sklouzne do „AI policie" a business týmy nemají ownership nad workflow.</p>
             </div>
-            <div class="card" style="border-left:3px solid var(--blue);">
-                <div class="tool-name" style="margin-bottom:6px;">McKinsey: Use-case portfolio (ne jeden velký projekt)</div>
+
+            <!-- MODEL 2: BSP-first -->
+            <div class="card" style="border-left:3px solid var(--green);">
+                <div class="tool-name" style="margin-bottom:6px;">Model 2: BSP-first — nejdřív podpůrné procesy (EU komise)</div>
+                <p style="font-size:0.85rem;color:var(--gray);margin-bottom:10px;">Evropská komise přímo říká: AI v business support procesech vytváří dovednosti, governance a důvěru potřebné k tomu, aby se AI později rozšířila do core operations. <strong>Nejdřív transformuj podpůrné procesy, teprve potom core.</strong></p>
                 <div style="font-size:0.85rem;color:var(--gray);">
-                    <div style="margin-bottom:6px;"><strong style="color:var(--green);">Quick wins:</strong> meeting notes, search, summarizace, drafting — <em>máme</em></div>
-                    <div style="margin-bottom:6px;"><strong style="color:var(--blue);">Unit economics:</strong> rychlejší nabídky, méně manuálních hodin, support deflection</div>
-                    <div style="margin-bottom:6px;"><strong style="color:var(--purple);">Data leverage:</strong> AI nad CRM/ERP/helpdesk/knowledge base</div>
-                    <div><strong style="color:var(--accent);">Strategic reinvention:</strong> nové produkty/služby, self-service — <em>sem míříme</em></div>
+                    <strong style="color:var(--text);">Kde začít:</strong>
+                    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;">
+                        <span style="background:rgba(255,255,255,0.05);padding:4px 10px;border-radius:6px;font-size:0.8rem;">Customer support</span>
+                        <span style="background:rgba(255,255,255,0.05);padding:4px 10px;border-radius:6px;font-size:0.8rem;">Sales admin & nabídky</span>
+                        <span style="background:rgba(255,255,255,0.05);padding:4px 10px;border-radius:6px;font-size:0.8rem;">Finance & faktury</span>
+                        <span style="background:rgba(255,255,255,0.05);padding:4px 10px;border-radius:6px;font-size:0.8rem;">HR & onboarding</span>
+                        <span style="background:rgba(255,255,255,0.05);padding:4px 10px;border-radius:6px;font-size:0.8rem;">Marketing & content</span>
+                        <span style="background:rgba(255,255,255,0.05);padding:4px 10px;border-radius:6px;font-size:0.8rem;">Knowledge management</span>
+                    </div>
+                </div>
+                <p style="font-size:0.82rem;color:var(--gray);margin-top:10px;">70 % procesů neznamená 70 % plně automatizovaných. Znamená, že AI je embedded ve většině workflow jako <strong>copilot, classifier, summarizer, router, knowledge layer nebo QA layer</strong>.</p>
+            </div>
+
+            <!-- MODEL 3: Fluency → Workflow → Agents -->
+            <div class="card" style="border-left:3px solid var(--blue);">
+                <div class="tool-name" style="margin-bottom:6px;">Model 3: Fluency → Workflow → Agents (OpenAI)</div>
+                <p style="font-size:0.85rem;color:var(--gray);margin-bottom:10px;">Firmy, které se posouvají nejrychleji, nejdou od pilotu k pilotu, ale od fluency k workflow integraci a pak teprve k agentům. Spousta SMB chce skočit rovnou do agentů. <strong>To je chyba.</strong></p>
+                <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                    <div style="flex:1;min-width:160px;padding:12px;background:rgba(76,175,80,0.08);border-radius:8px;">
+                        <div style="font-size:0.72rem;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:1px;">Fáze 1: Fluency</div>
+                        <div style="font-size:0.85rem;margin-top:4px;">Každý zaměstnanec umí AI použít pro svou práci</div>
+                        <div style="font-size:0.75rem;color:var(--accent);margin-top:4px;font-weight:700;">← JSME ZDE</div>
+                    </div>
+                    <div style="flex:1;min-width:160px;padding:12px;background:rgba(26,127,212,0.08);border-radius:8px;">
+                        <div style="font-size:0.72rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:1px;">Fáze 2: Workflow</div>
+                        <div style="font-size:0.85rem;margin-top:4px;">Top workflow zabudované do standardních nástrojů a SOP</div>
+                    </div>
+                    <div style="flex:1;min-width:160px;padding:12px;background:rgba(124,77,255,0.08);border-radius:8px;">
+                        <div style="font-size:0.72rem;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:1px;">Fáze 3: Agents</div>
+                        <div style="font-size:0.85rem;margin-top:4px;">Vybrané procesy agentizované s human-in-the-loop</div>
+                    </div>
+                </div>
+                <p style="font-size:0.82rem;color:var(--red);margin-top:10px;"><strong>Bez fluency a governance se agenti mění na drahé demo.</strong> Nejdřív musí lidi umět, pak teprve automatizovat.</p>
+            </div>
+
+            <!-- MODEL 4: Top-down + Bottom-up -->
+            <div class="card" style="border-left:3px solid var(--orange);">
+                <div class="tool-name" style="margin-bottom:6px;">Model 4: Top-down cíl + Bottom-up use cases (OpenAI leadership guide)</div>
+                <p style="font-size:0.85rem;color:var(--gray);margin-bottom:10px;">OpenAI doporučuje nastavit company-wide AI adoption goal navázaný na každodenní práci a KPI. Pět principů: <strong>Align, Activate, Amplify, Accelerate, Govern.</strong></p>
+                <div style="font-size:0.85rem;color:var(--gray);">
+                    <div style="margin-bottom:6px;">⬇️ <strong style="color:var(--text);">Top-down:</strong> Vedení řekne, proč AI souvisí s růstem, marží, rychlostí a kvalitou.</div>
+                    <div style="margin-bottom:6px;">⬆️ <strong style="color:var(--text);">Bottom-up:</strong> Týmy sbírají konkrétní use cases a redesignují workflow.</div>
+                    <div>↔️ <strong style="color:var(--text);">Middle-out:</strong> Champions překládají strategii do denní praxe.</div>
+                </div>
+                <p style="font-size:0.82rem;color:var(--red);margin-top:10px;"><strong>Bez top-down cíle vznikne chaos. Bez bottom-up návrhů vznikne powerpoint.</strong></p>
+            </div>
+
+            <!-- MODEL 5: Portfolio -->
+            <div class="card" style="border-left:3px solid var(--accent);">
+                <div class="tool-name" style="margin-bottom:6px;">Model 5: Use-case portfolio (McKinsey + OpenAI)</div>
+                <p style="font-size:0.85rem;color:var(--gray);margin-bottom:10px;">Ne jeden monolitický AI program, ale portfolio value models. Firmy, které z AI dostávají nejvíc, ji neřídí jako sérii odtržených pilotů.</p>
+                <div style="font-size:0.85rem;color:var(--gray);">
+                    <div style="margin-bottom:6px;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:6px;"></span><strong style="color:var(--green);">Quick wins:</strong> meeting notes, search, summarizace, drafting — <em>máme</em></div>
+                    <div style="margin-bottom:6px;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--blue);margin-right:6px;"></span><strong style="color:var(--blue);">Unit economics:</strong> rychlejší nabídky, méně manuálních hodin, support deflection</div>
+                    <div style="margin-bottom:6px;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--purple);margin-right:6px;"></span><strong style="color:var(--purple);">Data leverage:</strong> AI nad CRM/ERP/helpdesk/knowledge base</div>
+                    <div><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-right:6px;"></span><strong style="color:var(--accent);">Strategic reinvention:</strong> nové produkty/služby, self-service — <em>sem míříme</em></div>
                 </div>
             </div>
 
-            <div class="warn" style="margin-top:16px;">
-                <strong style="color:var(--red);">V EU používá AI jen ~30 % středních firem</strong> (Eurostat 2025). Kdo se posune první, získá trvalou výhodu. VITAR má CEO sponzora, power users, a tento program. Teď potřebujeme exekuci.
+            <!-- 7 ZNAKŮ -->
+            <div class="card" style="border-left:3px solid var(--red);padding:24px;">
+                <div class="tool-name" style="margin-bottom:10px;">7 znaků firem, které jsou nejdál (napříč zdroji)</div>
+                <ol style="font-size:0.85rem;margin:0;padding-left:20px;color:var(--gray);">
+                    <li style="margin-bottom:6px;"><strong style="color:var(--text);">CEO sponsor a jasné „proč teď"</strong> — bez přímého leadership signálu adopce zůstává u pár nadšenců <span style="color:var(--green);">✅ máme (Tomáš)</span></li>
+                    <li style="margin-bottom:6px;"><strong style="color:var(--text);">Jedna lehká governance vrstva</strong> — ne enterprise board; stačí policy, approved tools, citlivá data, logging, evals <span style="color:var(--orange);">⚡ budujeme</span></li>
+                    <li style="margin-bottom:6px;"><strong style="color:var(--text);">Start v business support procesech</strong> — EU: právě to vytváří základ pro širší transformaci <span style="color:var(--green);">✅ děláme</span></li>
+                    <li style="margin-bottom:6px;"><strong style="color:var(--text);">Champions network</strong> — 1 provozní tahoun na tým, ne školitel na plný úvazek <span style="color:var(--orange);">⚡ identifikujeme</span></li>
+                    <li style="margin-bottom:6px;"><strong style="color:var(--text);">Měření adopce i hodnoty</strong> — ne jen počet licencí: WAU, % týmů se 3+ AI workflow, hodinová úspora, cycle time, first-pass quality</li>
+                    <li style="margin-bottom:6px;"><strong style="color:var(--text);">Standardizace</strong> — nejdřív manuální prompty, pak reusable playbooky, až potom automatizace</li>
+                    <li><strong style="color:var(--text);">Human-in-the-loop</strong> u všeho s obchodním, právním nebo reputačním dopadem — zejména v EU regulatorním prostředí</li>
+                </ol>
+            </div>
+
+            <!-- EU DATA -->
+            <div class="warn" style="margin-top:16px;padding:24px;">
+                <h3 style="color:var(--red);margin:0 0 10px;">Evropská data (Eurostat 2025)</h3>
+                <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px;">
+                    <div style="text-align:center;flex:1;min-width:100px;">
+                        <div style="font-size:1.6rem;font-weight:800;color:var(--red);">20%</div>
+                        <div style="font-size:0.75rem;color:var(--gray);">všech podniků v EU používá AI</div>
+                    </div>
+                    <div style="text-align:center;flex:1;min-width:100px;">
+                        <div style="font-size:1.6rem;font-weight:800;color:var(--orange);">30%</div>
+                        <div style="font-size:0.75rem;color:var(--gray);">středních firem</div>
+                    </div>
+                    <div style="text-align:center;flex:1;min-width:100px;">
+                        <div style="font-size:1.6rem;font-weight:800;color:var(--green);">55%</div>
+                        <div style="font-size:0.75rem;color:var(--gray);">velkých firem</div>
+                    </div>
+                </div>
+                <p style="font-size:0.85rem;margin:0;">Firmy, které se dostanou k plošnější adopci, jsou pořád <strong>menšina</strong>. Největší příležitost je ve středně velkých firmách — dost procesní struktury, ale ještě ne enterprise složitost. <strong>To jsme my. Teď potřebujeme exekuci.</strong></p>
             </div>
 
             <h3>Co už dnes funguje</h3>
