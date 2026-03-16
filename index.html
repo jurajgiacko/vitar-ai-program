@@ -429,13 +429,36 @@
 
         .divider { height: 1px; background: var(--border); margin: 32px 0; }
 
+        .dl-btn {
+            position: fixed;
+            top: 16px;
+            right: 20px;
+            z-index: 100;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: var(--accent);
+            color: #0f1729;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.8rem;
+            transition: opacity 0.15s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .dl-btn:hover { opacity: 0.85; }
+
         @media (max-width: 768px) {
             .sidebar { display: none; }
             .main { margin-left: 0; padding: 24px 16px 60px; }
+            .dl-btn { top: 10px; right: 10px; font-size: 0.72rem; padding: 6px 12px; }
         }
     </style>
 </head>
 <body>
+
+    <a href="AI-PROGRAM.md" download class="dl-btn">⬇ Stáhnout .md</a>
 
     <!-- SIDEBAR -->
     <nav class="sidebar">
@@ -561,9 +584,6 @@
                 <strong>Zdroj:</strong> Meeting AI Governance 11.3.2026 (Tomáš, Radim, Juraj, Daniel, Karolína, Radovan) + deep research EU best practices (McKinsey, Eurostat, OECD, OpenAI).
             </div>
 
-            <a href="AI-PROGRAM.md" download style="display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:12px 24px;background:var(--accent);color:#0f1729;border-radius:8px;text-decoration:none;font-weight:700;font-size:0.9rem;transition:opacity 0.15s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-                ⬇ Stáhnout jako Markdown (.md)
-            </a>
         </div>
 
         <!-- MODULE 1: AI MINDSET -->
