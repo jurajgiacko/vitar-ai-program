@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI @ VITAR — Program</title>
+    <style>
+        :root {
+            --bg: #0f1729;
+            --sidebar: #131d33;
+            --card: #1a2438;
+            --card-hover: #212f47;
+            --accent: #f5a623;
+            --accent-light: rgba(245,166,35,0.12);
+            --purple: #7C4DFF;
+            --green: #4CAF50;
+            --red: #E53935;
+            --orange: #FF9800;
+            --blue: #1a7fd4;
+            --text: #e2e8f0;
+            --gray: #94a3b8;
+            --muted: #64748b;
+            --border: rgba(255,255,255,0.06);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 280px;
+            background: var(--sidebar);
+            border-right: 1px solid var(--border);
+            padding: 24px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            overflow-y: auto;
+            z-index: 10;
+        }
+        .sidebar-logo {
+            padding: 0 24px 24px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 16px;
+        }
+        .sidebar-logo h2 {
+            font-size: 1.1rem;
+            color: var(--accent);
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+        .sidebar-logo p {
+            font-size: 0.72rem;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+        .sidebar-section {
+            padding: 8px 16px;
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--muted);
+            font-weight: 700;
+        }
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 24px;
+            cursor: pointer;
+            transition: all 0.15s;
+            font-size: 0.88rem;
+            color: var(--gray);
+            border-left: 3px solid transparent;
+        }
+        .sidebar-item:hover {
+            background: rgba(255,255,255,0.03);
+            color: var(--text);
+        }
+        .sidebar-item.active {
+            background: var(--accent-light);
+            color: var(--accent);
+            border-left-color: var(--accent);
+            font-weight: 600;
+        }
+        .sidebar-item .num {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.72rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .sidebar-item.active .num {
+            background: var(--accent);
+            color: var(--bg);
+        }
+        .sidebar-progress {
+            margin: 16px 24px;
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            font-size: 0.78rem;
+        }
+        .sidebar-progress .bar {
+            height: 4px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 4px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+        .sidebar-progress .bar-fill {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+        .sidebar-user {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 16px 24px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .sidebar-user .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.72rem;
+            font-weight: 800;
+            color: var(--bg);
+        }
+        .sidebar-user .name {
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+        .sidebar-user .org {
+            font-size: 0.68rem;
+            color: var(--muted);
+        }
+
+        /* MAIN */
+        .main {
+            margin-left: 280px;
+            flex: 1;
+            padding: 40px 48px 80px;
+            max-width: 900px;
+        }
+        .main h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+        .main .subtitle {
+            color: var(--gray);
+            font-size: 0.92rem;
+            margin-bottom: 32px;
+        }
+
+        /* MODULE CONTENT */
+        .module-section {
+            display: none;
+        }
+        .module-section.active {
+            display: block;
+        }
+
+        /* OVERVIEW */
+        .module-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.15s;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .module-card:hover {
+            background: var(--card-hover);
+            border-color: rgba(255,255,255,0.1);
+        }
+        .module-card.current {
+            border-color: var(--accent);
+            background: var(--accent-light);
+        }
+        .module-card .mc-num {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.88rem;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+        .module-card.current .mc-num {
+            background: var(--accent);
+            color: var(--bg);
+        }
+        .module-card .mc-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+        .module-card .mc-desc {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 2px;
+        }
+        .module-card .mc-badge {
+            margin-left: auto;
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+        .mc-badge.ready { background: rgba(76,175,80,0.15); color: var(--green); }
+        .mc-badge.current { background: var(--accent-light); color: var(--accent); }
+
+        /* CONTENT SECTIONS */
+        section h2 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+        section h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-top: 24px;
+            margin-bottom: 8px;
+        }
+        .gray { color: var(--gray); font-size: 0.88rem; }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--accent);
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 20px;
+            text-decoration: none;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin: 16px 0;
+        }
+        .wrong {
+            background: rgba(229,57,53,0.08);
+            border: 1px solid rgba(229,57,53,0.2);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin: 16px 0;
+        }
+        .right {
+            background: rgba(76,175,80,0.08);
+            border: 1px solid rgba(76,175,80,0.2);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin: 16px 0;
+        }
+        .label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .wrong .label { color: var(--red); }
+        .right .label { color: var(--green); }
+        .highlight {
+            background: rgba(124,77,255,0.08);
+            border: 1px solid rgba(124,77,255,0.2);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            font-size: 0.88rem;
+        }
+        .warn {
+            background: rgba(229,57,53,0.08);
+            border: 1px solid rgba(229,57,53,0.2);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            font-size: 0.88rem;
+        }
+        .info {
+            background: rgba(26,127,212,0.08);
+            border: 1px solid rgba(26,127,212,0.2);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            font-size: 0.88rem;
+        }
+        .tool-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin: 6px 0;
+        }
+        .tool-name { font-weight: 700; font-size: 0.92rem; }
+        .tool-desc { font-size: 0.8rem; color: var(--gray); margin-top: 2px; }
+        .tool-price { font-size: 0.82rem; font-weight: 700; flex-shrink: 0; }
+
+        .zone { border-radius: 12px; padding: 20px 24px; margin: 12px 0; }
+        .zone.red { background: rgba(229,57,53,0.06); border: 1px solid rgba(229,57,53,0.2); }
+        .zone.green { background: rgba(76,175,80,0.06); border: 1px solid rgba(76,175,80,0.2); }
+        .zone-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+        .zone.red .zone-label { color: var(--red); }
+        .zone.green .zone-label { color: var(--green); }
+        .zone-items { display: flex; flex-wrap: wrap; gap: 6px; }
+        .zone-item {
+            background: rgba(255,255,255,0.05);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+        }
+
+        .role-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin: 8px 0;
+        }
+        .role-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.72rem;
+            font-weight: 800;
+            color: white;
+            flex-shrink: 0;
+        }
+        .role-name { font-weight: 700; font-size: 0.9rem; }
+        .role-what { font-size: 0.8rem; color: var(--gray); margin-top: 2px; }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 16px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            margin: -1px 0 0;
+        }
+        .flow-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.72rem;
+            font-weight: 800;
+            color: white;
+            flex-shrink: 0;
+        }
+        .flow-text { font-size: 0.88rem; }
+
+        .timeline-item {
+            display: flex;
+            gap: 16px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            align-items: baseline;
+        }
+        .timeline-date {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--accent);
+            min-width: 50px;
+            flex-shrink: 0;
+        }
+        .timeline-text { font-size: 0.88rem; }
+
+        .budget-box {
+            text-align: center;
+            padding: 32px;
+            background: linear-gradient(135deg, rgba(124,77,255,0.1), rgba(26,127,212,0.1));
+            border: 1px solid rgba(124,77,255,0.2);
+            border-radius: 16px;
+            margin: 24px 0;
+        }
+        .budget-number { font-size: 2rem; font-weight: 800; color: var(--purple); }
+        .budget-label { font-size: 0.88rem; color: var(--gray); margin-top: 4px; }
+        .budget-roi { font-size: 0.85rem; margin-top: 12px; color: var(--text); }
+
+        .divider { height: 1px; background: var(--border); margin: 32px 0; }
+
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            .main { margin-left: 0; padding: 24px 16px 60px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <nav class="sidebar">
+        <div class="sidebar-logo">
+            <h2>AI @ VITAR</h2>
+            <p>Interní AI program · 2026</p>
+        </div>
+
+        <div class="sidebar-section">Program</div>
+        <div class="sidebar-item active" onclick="showModule('overview')">
+            <span class="num">☰</span> Přehled programu
+        </div>
+
+        <div class="sidebar-section">Moduly</div>
+        <div class="sidebar-item" onclick="showModule('m1')">
+            <span class="num">1</span> AI Mindset
+        </div>
+        <div class="sidebar-item" onclick="showModule('m2')">
+            <span class="num">2</span> Nástroje & Stack
+        </div>
+        <div class="sidebar-item" onclick="showModule('m3')">
+            <span class="num">3</span> Dvě kategorie
+        </div>
+        <div class="sidebar-item" onclick="showModule('m4')">
+            <span class="num">4</span> Release proces
+        </div>
+        <div class="sidebar-item" onclick="showModule('m5')">
+            <span class="num">5</span> Lidé & role
+        </div>
+        <div class="sidebar-item" onclick="showModule('m6')">
+            <span class="num">6</span> Jak začít
+        </div>
+        <div class="sidebar-item" onclick="showModule('m7')">
+            <span class="num">7</span> Plán & budget
+        </div>
+
+        <div class="sidebar-section" style="margin-top:16px;">Zdroje</div>
+        <div class="sidebar-item" onclick="showModule('faq')">
+            <span class="num">?</span> FAQ
+        </div>
+
+        <div class="sidebar-progress">
+            <span style="color:var(--accent);font-weight:700;">7 modulů</span>
+            <span style="color:var(--muted);"> · vše dostupné</span>
+            <div class="bar"><div class="bar-fill" style="width:100%"></div></div>
+        </div>
+
+        <div class="sidebar-user">
+            <div class="avatar">V</div>
+            <div>
+                <div class="name">VITAR Group</div>
+                <div class="org">AI Implementace</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="main">
+
+        <!-- OVERVIEW -->
+        <div class="module-section active" id="overview">
+            <h1>Přehled programu</h1>
+            <p class="subtitle">Tvůj průvodce AI implementací ve VITARu. 7 modulů, konkrétní kroky, žádná teorie.</p>
+
+            <div class="module-card current" onclick="showModule('m1')">
+                <div class="mc-num">1</div>
+                <div>
+                    <div class="mc-title">AI Mindset — proč jinak</div>
+                    <div class="mc-desc">Přestaňte kopírovat do ChatGPT. Jak to vypadá, když AI vidí vaše soubory.</div>
+                </div>
+                <div class="mc-badge current">Start zde</div>
+            </div>
+            <div class="module-card" onclick="showModule('m2')">
+                <div class="mc-num">2</div>
+                <div>
+                    <div class="mc-title">Nástroje & Stack</div>
+                    <div class="mc-desc">Cursor, GitHub, Vercel, Claude, Gemini, kreativní AI. Co používáme a proč.</div>
+                </div>
+                <div class="mc-badge ready">Dostupné</div>
+            </div>
+            <div class="module-card" onclick="showModule('m3')">
+                <div class="mc-num">3</div>
+                <div>
+                    <div class="mc-title">Dvě kategorie — klíčové pravidlo</div>
+                    <div class="mc-desc">Co smíte volně, co musí projít procesem. Data pravidla za 30 sekund.</div>
+                </div>
+                <div class="mc-badge ready">Dostupné</div>
+            </div>
+            <div class="module-card" onclick="showModule('m4')">
+                <div class="mc-num">4</div>
+                <div>
+                    <div class="mc-title">Release proces & GitHub</div>
+                    <div class="mc-desc">3-fázová metodika (Alfa → Beta → Live). GitHub pravidla. OWASP security.</div>
+                </div>
+                <div class="mc-badge ready">Dostupné</div>
+            </div>
+            <div class="module-card" onclick="showModule('m5')">
+                <div class="mc-num">5</div>
+                <div>
+                    <div class="mc-title">Lidé & role</div>
+                    <div class="mc-desc">Kdo co dělá. Sponsor, security, architekt, kreativa, IT. Žádná byrokracie.</div>
+                </div>
+                <div class="mc-badge ready">Dostupné</div>
+            </div>
+            <div class="module-card" onclick="showModule('m6')">
+                <div class="mc-num">6</div>
+                <div>
+                    <div class="mc-title">Jak začít</div>
+                    <div class="mc-desc">Chci licenci. Chci buildovat. Teams kanál. Schvalovací flow.</div>
+                </div>
+                <div class="mc-badge ready">Dostupné</div>
+            </div>
+            <div class="module-card" onclick="showModule('m7')">
+                <div class="mc-num">7</div>
+                <div>
+                    <div class="mc-title">Plán & budget</div>
+                    <div class="mc-desc">Prvních 30 dní s dátumy. Budget. ROI. Co od IT.</div>
+                </div>
+                <div class="mc-badge ready">Dostupné</div>
+            </div>
+
+            <div class="info" style="margin-top:24px;">
+                <strong>Zdroj:</strong> Obsah vychází z meetingu AI Governance 11.3.2026 (Tomáš, Radim, Juraj, Daniel, Karolína, Radovan) a programu <a href="https://futureaileader.com" target="_blank" style="color:var(--accent);">Future AI Leader 2026</a>.
+            </div>
+        </div>
+
+        <!-- MODULE 1: AI MINDSET -->
+        <div class="module-section" id="m1">
+            <a class="back-link" onclick="showModule('overview')">← Přehled programu</a>
+            <h1>Modul 1: AI Mindset</h1>
+            <p class="subtitle">Proč kopírování do ChatGPT není AI. A co dělat místo toho.</p>
+
+            <div class="wrong">
+                <div class="label">Takhle to dělá většina firem</div>
+                <p style="font-size:0.9rem;">Otevřít ChatGPT → zkopírovat text → dostat odpověď → zkopírovat zpátky → ručně opravit, protože AI neměla kontext → opakovat. Po měsíci pocit: „fajn, ale nic zásadního."</p>
+            </div>
+            <div class="right">
+                <div class="label">Takhle to budeme dělat my</div>
+                <p style="font-size:0.9rem;">AI vidí přímo vaše soubory. Řeknete <em>„Udělej z tohohle report"</em> — a ona to udělá. Řeknete <em>„Vygeneruj HTML prezentaci z těchto dat"</em> — za 30 minut hotový web. <strong>Kontext > prompty.</strong></p>
+            </div>
+
+            <h3>Co už dnes funguje</h3>
+            <div class="card">
+                <div style="display:grid;gap:10px;">
+                    <div style="display:flex;justify-content:space-between;"><span><strong>HTML prezentace pro retail</strong> — Intersport cenník</span><span style="color:var(--green);font-size:0.82rem;">30 min vs. 2 dny</span></div>
+                    <div style="display:flex;justify-content:space-between;"><span><strong>126 bannerů</strong> — outlet kampaň CZ+SK</span><span style="color:var(--green);font-size:0.82rem;">2h vs. 3 dny</span></div>
+                    <div style="display:flex;justify-content:space-between;"><span><strong>Produktové karty e-shop</strong> — SEO, HTML</span><span style="color:var(--green);font-size:0.82rem;">4h vs. 2 dny</span></div>
+                    <div style="display:flex;justify-content:space-between;"><span><strong>Prospector</strong> — 5 464 B2B kontaktů, dashboard</span><span style="color:var(--green);font-size:0.82rem;">MVP live</span></div>
+                </div>
+            </div>
+
+            <h3>Projekty v buildu</h3>
+            <div class="tool-row">
+                <div>
+                    <div class="tool-name">Kalkulačka vývoje</div>
+                    <div class="tool-desc">Webová app — obchodník zadá parametry, dostane cenu. Aktuálně v Lovable, rozhodnutí: pokračovat nebo migrovat do Cursoru.</div>
+                </div>
+                <div style="font-size:0.72rem;color:var(--orange);font-weight:700;">PRIORITA 1</div>
+            </div>
+            <div class="tool-row">
+                <div>
+                    <div class="tool-name">Vzorky app</div>
+                    <div class="tool-desc">Formulář → admin view (zákaznický servis) → PDF pro sklad. Analýza v Miro (Karolína). Potřeba 2–3 řádky testovací DB.</div>
+                </div>
+                <div style="font-size:0.72rem;color:var(--gray);font-weight:700;">PRIORITA 2</div>
+            </div>
+
+            <div class="highlight">
+                <strong>Cíl:</strong> Marketing assety v GitHubu. Verzované, sdílené, nasaditelné. Žádné <code>v7_final_FINAL.pptx</code>.
+            </div>
+        </div>
+
+        <!-- MODULE 2: NÁSTROJE -->
+        <div class="module-section" id="m2">
+            <a class="back-link" onclick="showModule('overview')">← Přehled programu</a>
+            <h1>Modul 2: Nástroje & Stack</h1>
+            <p class="subtitle">Žádný ChatGPT Teams. Pořádné nástroje, které mění způsob práce.</p>
+
+            <h3>Pro buildování</h3>
+            <div class="tool-row">
+                <div>
+                    <div class="tool-name">Cursor</div>
+                    <div class="tool-desc">AI editor. Vidí vaše soubory. Píše kód, generuje weby, reporty, prezentace. <strong>To hlavní.</strong></div>
+                </div>
+                <div class="tool-price" style="color:var(--purple);">$20/měs</div>
+            </div>
+            <div class="tool-row">
+                <div>
+                    <div class="tool-name">GitHub</div>
+                    <div class="tool-desc">Všechno co vyrobíme je tu. Verzované. Sdílené. 1 projekt = 1 repozitář.</div>
+                </div>
+                <div class="tool-price" style="color:var(--green);">zdarma</div>
+            </div>
+            <div class="tool-row">
+                <div>
+                    <div class="tool-name">Vercel</div>
+                    <div class="tool-desc">Hosting. 1 klik z GitHubu = live web. Testovací i produkční prostředí.</div>
+                </div>
+                <div class="tool-price" style="color:var(--green);">zdarma</div>
+            </div>
+
+            <h3>Pro každodenní práci</h3>
+            <div class="tool-row">
+                <div>
+                    <div class="tool-name">Claude Pro</div>
+                    <div class="tool-desc">Konverzační AI. Emaily, research, analýzy, překlady.</div>
+                </div>
+                <div class="tool-price" style="color:var(--purple);">$20/měs</div>
+            </div>
+            <div class="tool-row">
+                <div>
+                    <div class="tool-name">Gemini Pro</div>
+                    <div class="tool-desc">Google AI. Kreativa, texty, analýzy.</div>
+                </div>
+                <div class="tool-price" style="color:var(--purple);">$20/měs</div>
+            </div>
+
+            <h3>Pro kreativní tým</h3>
+            <div class="tool-row">
+                <div>
+                    <div class="tool-name">Artlist</div>
+                    <div class="tool-desc">AI vizuály — bannery, produktové fotky, kreativa.</div>
+                </div>
+                <div class="tool-price" style="color:var(--purple);">Pro</div>
+            </div>
+            <div class="tool-row">
+                <div>
+                    <div class="tool-name">Koda</div>
+                    <div class="tool-desc">AI vizuální nástroj. Testování vedle Artlistu.</div>
+                </div>
+                <div class="tool-price" style="color:var(--purple);">Pro</div>
+            </div>
+
+            <div class="info">
+                <strong>Testovací účty (schváleno Tomášem 11.3.):</strong> Registrace přes <code>ai-devel@vitar.cz</code>. 3 předplatná na 1 měsíc. Po 2 týdnech rozhodnutí o jmenných účtech.
+            </div>
+
+            <div class="highlight">
+                <strong>Lovable:</strong> No-code prototyping. Dá se napojit na GitHub (auto-sync), ale nechová se agenticky — proto přechod na Cursor pro seriózní vývoj.
+            </div>
+        </div>
+
+        <!-- MODULE 3: DVĚ KATEGORIE -->
+        <div class="module-section" id="m3">
+            <a class="back-link" onclick="showModule('overview')">← Přehled programu</a>
+            <h1>Modul 3: Dvě kategorie</h1>
+            <p class="subtitle">Klíčové pravidlo dohodnuté 11.3. Základ celého přístupu.</p>
+
+            <div class="zone green" style="border-color:rgba(76,175,80,0.4);">
+                <div class="zone-label">Kategorie 1: Mimo firemní data → volně</div>
+                <p style="font-size:0.88rem;margin-bottom:10px;">Prezentace, HTML stránky, brand materiály, překlady, emaily, research, SOP. <strong>Povoleno okamžitě</strong> s basic best practices. Žádné schválení navíc.</p>
+                <div class="zone-items">
+                    <div class="zone-item">Marketing texty</div>
+                    <div class="zone-item">Prezentace</div>
+                    <div class="zone-item">Překlady</div>
+                    <div class="zone-item">Emaily, nabídky</div>
+                    <div class="zone-item">Research, analýzy</div>
+                    <div class="zone-item">SOP, návody</div>
+                    <div class="zone-item">Brand materiály</div>
+                </div>
+            </div>
+
+            <div class="zone red" style="border-color:rgba(229,57,53,0.4);">
+                <div class="zone-label">Kategorie 2: Sahá na firemní data → plný release proces</div>
+                <p style="font-size:0.88rem;margin-bottom:10px;">Kalkulačka vývoje, vzorky app, CRM, cokoliv s firemní DB. <strong>Musí projít 3-fázovou release metodikou</strong> (Alfa → Beta → Live). Scope dokument před prvním řádkem kódu.</p>
+                <div class="zone-items">
+                    <div class="zone-item">Receptury, složení</div>
+                    <div class="zone-item">Finanční výkazy, marže</div>
+                    <div class="zone-item">Mzdy, smlouvy</div>
+                    <div class="zone-item">CRM, zákaznické DB</div>
+                    <div class="zone-item">Cenové podmínky</div>
+                    <div class="zone-item">Kapacitní plány</div>
+                </div>
+            </div>
+
+            <div class="warn">
+                <strong style="color:var(--red);">⚠ Riziko (Tomáš, 11.3.):</strong> „Někdo si postaví Cursor bot na firemním počítači, napojí na firemní složky — a jsme v prdeli." Proto dvě kategorie. Proto scope dokument. Proto sandbox.
+            </div>
+
+            <p class="gray" style="margin-top:16px;"><strong style="color:var(--text);">Nevíte?</strong> Zeptejte se v Teams kanálu AI @ VITAR. Lepší se zeptat než dát recepturu do AI.</p>
+        </div>
+
+        <!-- MODULE 4: RELEASE PROCES -->
+        <div class="module-section" id="m4">
+            <a class="back-link" onclick="showModule('overview')">← Přehled programu</a>
+            <h1>Modul 4: Release proces & GitHub</h1>
+            <p class="subtitle">3-fázová metodika pro vše, co sahá na firemní data. GitHub pravidla pro všechny.</p>
+
+            <h3>3-fázová release metodika (platí pro Kategorii 2)</h3>
+            <div style="display:flex;flex-direction:column;gap:0;">
+                <div class="flow-step" style="border-radius:10px 10px 0 0;">
+                    <div class="flow-num" style="background:var(--orange);">0</div>
+                    <div class="flow-text"><strong>Scope dokument</strong> — 1 stránka: co, proč, jaká data, autentifikace, role. <em>(Radim: „Bez plánu = riziko.")</em></div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-num" style="background:var(--orange);">1</div>
+                    <div class="flow-text"><strong>ALFA</strong> — builduju v sandboxu (Vercel + testovací DB). Žádná firemní data. IT nezatěžuju — <em>Dalibora zapojíme až s funkčním prototypem.</em></div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-num" style="background:var(--orange);">2</div>
+                    <div class="flow-text"><strong>BETA</strong> — Cross-model review (kód z Opus → kontrola Codexem). Člověk zkontroluje na základě strojové analýzy. OWASP Top 100 automaticky — 90 % čistoty bez lidské práce.</div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-num" style="background:var(--orange);">3</div>
+                    <div class="flow-text"><strong>Sign-off</strong> — Product Owner + Security (Radim): „toto je SAFE"</div>
+                </div>
+                <div class="flow-step" style="border-radius:0 0 10px 10px;">
+                    <div class="flow-num" style="background:var(--green);">✓</div>
+                    <div class="flow-text"><strong>LIVE</strong> — napojení na firemní DB, testování na firemním PC, onboarding uživatelů, monitoring</div>
+                </div>
+            </div>
+
+            <div class="info">
+                <strong style="color:var(--orange);">Budget control (Tomáš):</strong> Každý product owner má přidělený dolarový limit na tokeny. „Nevlezu do Cursoru hrát si — vlezu tam, až mám vymyšlenou strukturu a markdown dokumentaci. Jinak spálíme $100 za 40 minut."
+            </div>
+
+            <h3>GitHub pravidla (dohodnuto 11.3.)</h3>
+            <div class="tool-row"><div><div class="tool-name" style="font-size:0.88rem;">main = produkce</div><div class="tool-desc">Co je v main, to je live. Nikdo nepushuje přímo do main.</div></div></div>
+            <div class="tool-row"><div><div class="tool-name" style="font-size:0.88rem;">dev = testování</div><div class="tool-desc">Vývoj v dev branchi. Merge do main = code review.</div></div></div>
+            <div class="tool-row"><div><div class="tool-name" style="font-size:0.88rem;">Commity v markdownu</div><div class="tool-desc">Navigovatelné pro dalšího vývojáře. Automatizovaný log na konci dne.</div></div></div>
+            <div class="tool-row"><div><div class="tool-name" style="font-size:0.88rem;">README v každém repu</div><div class="tool-desc">Co to dělá, jak spustit, kdo to buildoval. Kolega musí být schopen pokračovat.</div></div></div>
+            <div class="tool-row"><div><div class="tool-name" style="font-size:0.88rem;">Private repos + licence</div><div class="tool-desc">Každý repo private. Licence kódu (Apache 2.0 nebo interní).</div></div></div>
+
+            <div class="highlight">
+                <strong>Existující infrastruktura (Radim):</strong> M365, SharePoint, Graph API, Entra ID. Nebudovat od nuly, využít co firma má. SSO vyřešit jednou, ne pro každou appku.
+            </div>
+        </div>
+
+        <!-- MODULE 5: LIDÉ & ROLE -->
+        <div class="module-section" id="m5">
+            <a class="back-link" onclick="showModule('overview')">← Přehled programu</a>
+            <h1>Modul 5: Lidé & role</h1>
+            <p class="subtitle">Kdo co dělá. Žádná zbytečná byrokracie — jasná odpovědnost.</p>
+
+            <h3>Rozhodování & schvalování</h3>
+            <div class="role-card">
+                <div class="role-avatar" style="background:var(--orange);">TČ</div>
+                <div>
+                    <div class="role-name">Tomáš Červinka — Sponsor & CEO</div>
+                    <div class="role-what">Strategické rozhodnutí, budget, „proč to děláme." Schvaluje nové projekty. Natočí Loom tutoriál: Cursor → GitHub → Code flow.</div>
+                </div>
+            </div>
+            <div class="role-card">
+                <div class="role-avatar" style="background:var(--blue);">RL</div>
+                <div>
+                    <div class="role-name">Radim Lorenc — IT & Security Garant</div>
+                    <div class="role-what">Schvaluje nástroje a release do produkce. Scope dokument před vývojem. Využít M365/Graph API/Entra — nebudovat od nuly. SSO řešit jednou.</div>
+                </div>
+            </div>
+
+            <h3>Architektura & inspirace</h3>
+            <div class="role-card">
+                <div class="role-avatar" style="background:var(--purple);">JG</div>
+                <div>
+                    <div class="role-name">Juraj Giacko — AI Architekt</div>
+                    <div class="role-what">Ukazuje jak na to. Buduje referenční implementace, sdílí best practices, vede workshopy. Inspiruje a školí — <strong>neschvaluje</strong>. Schvalují Tomáš (strategie/budget) a Radim (bezpečnost/IT).</div>
+                </div>
+            </div>
+
+            <h3>Exekuce</h3>
+            <div class="role-card">
+                <div class="role-avatar" style="background:#546E7A;">DS</div>
+                <div>
+                    <div class="role-name">Dan Sládečk — IT exekuce</div>
+                    <div class="role-what">GitHub setup, testovací účty, registrace nástrojů. Hands-on IT podpora pro AI tým.</div>
+                </div>
+            </div>
+            <div class="role-card">
+                <div class="role-avatar" style="background:#8D6E63;">KD</div>
+                <div>
+                    <div class="role-name">Karolína Doušová — Analýza & BI</div>
+                    <div class="role-what">Vzorky app analýza (Miro), Power BI dashboard, zákaznický servis workflow. Scope dokumenty.</div>
+                </div>
+            </div>
+
+            <h3>Kreativní tým</h3>
+            <div class="role-card">
+                <div class="role-avatar" style="background:#26A69A;">RZ</div>
+                <div>
+                    <div class="role-name">Radovan Zajíc — Kreativa</div>
+                    <div class="role-what">Testuje Artlist, Gemini, Koda. Zastupuje kreativní potřeby designu a marketingu.</div>
+                </div>
+            </div>
+            <div class="role-card">
+                <div class="role-avatar" style="background:#78909C;">DM</div>
+                <div>
+                    <div class="role-name">Daniel Mimochodek — Design</div>
+                    <div class="role-what">Vizuály, kampaně, produktové fotky. Testuje AI pro kreativní workflow.</div>
+                </div>
+            </div>
+
+            <h3>Championi</h3>
+            <p class="gray">1 na oddělení. Ne expert, ale ochotný člověk, který ukáže ostatním co se naučil. Rotuje AI Morning Coffee. Vybereme z lidí, kteří to chtějí zkoušet.</p>
+
+            <div class="info">
+                <strong style="color:var(--blue);">Kapacita (Radim, 11.3.):</strong> Potřebujeme vychovat někoho interně — <strong>2–3 hodiny denně pravidelně</strong>, ne „když je trochu času." Zvažujeme i externího IT specialistu na part-time (kontakt od Kamila Škrobaly).
+            </div>
+
+            <div class="highlight">
+                <strong>AI Zlín:</strong> Radim se přihlásí do lokální AI komunity (25 CZK/rok). Diskuzní fóra, spolupráce s firmami. Kontakt: Honza Vlk — AI obchodník.
+            </div>
+        </div>
+
+        <!-- MODULE 6: JAK ZAČÍT -->
+        <div class="module-section" id="m6">
+            <a class="back-link" onclick="showModule('overview')">← Přehled programu</a>
+            <h1>Modul 6: Jak začít</h1>
+            <p class="subtitle">Chci AI. Jak ji dostanu. Kdo schvaluje. Kde se ptám.</p>
+
+            <h3>Chci Claude / Gemini ($20/měs)</h3>
+            <div style="display:flex;flex-direction:column;gap:0;">
+                <div class="flow-step" style="border-radius:10px 10px 0 0;">
+                    <div class="flow-num" style="background:var(--green);">1</div>
+                    <div class="flow-text">Požádám <strong>přímého nadřízeného</strong></div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-num" style="background:var(--green);">2</div>
+                    <div class="flow-text">Absolvuji <strong>2h hands-on workshop</strong></div>
+                </div>
+                <div class="flow-step" style="border-radius:0 0 10px 10px;">
+                    <div class="flow-num" style="background:var(--green);">3</div>
+                    <div class="flow-text">Dostanu licenci + přístup do <strong>Teams kanálu AI @ VITAR</strong></div>
+                </div>
+            </div>
+
+            <h3 style="margin-top:20px;">Chci Cursor ($20/měs)</h3>
+            <div style="display:flex;flex-direction:column;gap:0;">
+                <div class="flow-step" style="border-radius:10px 10px 0 0;">
+                    <div class="flow-num" style="background:var(--purple);">1</div>
+                    <div class="flow-text">Požádám <strong>přímého nadřízeného</strong></div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-num" style="background:var(--purple);">2</div>
+                    <div class="flow-text"><strong>Radim / IT</strong> schválí + povolí instalaci</div>
+                </div>
+                <div class="flow-step" style="border-radius:0 0 10px 10px;">
+                    <div class="flow-num" style="background:var(--purple);">3</div>
+                    <div class="flow-text">Setup s pomocí <strong>Tomášova Loom tutoriálu</strong> (Cursor → GitHub → Code flow)</div>
+                </div>
+            </div>
+
+            <h3 style="margin-top:20px;">Chci buildovat interní nástroj</h3>
+            <div style="display:flex;flex-direction:column;gap:0;">
+                <div class="flow-step" style="border-radius:10px 10px 0 0;">
+                    <div class="flow-num" style="background:var(--orange);">1</div>
+                    <div class="flow-text">Napíšu <strong>scope dokument</strong> — co, proč, jaká data, role</div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-num" style="background:var(--orange);">2</div>
+                    <div class="flow-text"><strong>Tomáš + Radim</strong> schválí scope</div>
+                </div>
+                <div class="flow-step" style="border-radius:0 0 10px 10px;">
+                    <div class="flow-num" style="background:var(--orange);">3</div>
+                    <div class="flow-text">Postupuji dle <strong>release procesu</strong> (→ <a onclick="showModule('m4')" style="color:var(--accent);cursor:pointer;">Modul 4</a>)</div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <h3>Teams kanál: AI @ VITAR</h3>
+            <p class="gray" style="margin-bottom:12px;">Jedno místo pro všechno. Připnuté pravidla, sdílené tipy, showcase.</p>
+            <div class="tool-row"><div><div class="tool-name" style="font-size:0.88rem;">📌 Připnuté</div><div class="tool-desc">Tento program, AI Use Policy, návod na Cursor</div></div></div>
+            <div class="tool-row"><div><div class="tool-name" style="font-size:0.88rem;">💡 Tipy & workflow</div><div class="tool-desc">Našel jsi dobrý postup? Hoď to sem.</div></div></div>
+            <div class="tool-row"><div><div class="tool-name" style="font-size:0.88rem;">❓ Otázky</div><div class="tool-desc">Nevíš jak na něco? Zeptej se, odpoví champion nebo tým.</div></div></div>
+            <div class="tool-row"><div><div class="tool-name" style="font-size:0.88rem;">🚀 Showcase</div><div class="tool-desc">Udělal jsi něco v AI co ti ušetřilo čas? Ukaž to ostatním.</div></div></div>
+
+            <h3>Pravidelné rituály</h3>
+            <div class="tool-row">
+                <div><div class="tool-name" style="font-size:0.88rem;">AI Morning Coffee — út 9:00, 15 min</div><div class="tool-desc">Champion ukáže 1 workflow. Celý tým se učí od sebe, ne od jednoho člověka.</div></div>
+                <div style="font-size:0.72rem;color:var(--green);font-weight:700;">TÝDNĚ</div>
+            </div>
+            <div class="tool-row">
+                <div><div class="tool-name" style="font-size:0.88rem;">AI Sync — čt 14:00, 30 min</div><div class="tool-desc">Championi + tým. Co nového, co nefunguje, blockery.</div></div>
+                <div style="font-size:0.72rem;color:var(--blue);font-weight:700;">TÝDNĚ</div>
+            </div>
+            <div class="tool-row">
+                <div><div class="tool-name" style="font-size:0.88rem;">AI Review — poslední pá, 45 min</div><div class="tool-desc">Tomáš + Radim + Juraj. Metriky, budget, bezpečnost, další krok.</div></div>
+                <div style="font-size:0.72rem;color:var(--purple);font-weight:700;">MĚSÍC</div>
+            </div>
+        </div>
+
+        <!-- MODULE 7: PLÁN & BUDGET -->
+        <div class="module-section" id="m7">
+            <a class="back-link" onclick="showModule('overview')">← Přehled programu</a>
+            <h1>Modul 7: Plán & budget</h1>
+            <p class="subtitle">Prvních 30 dní s dátumy. Co potřebujeme od IT. Kolik to stojí.</p>
+
+            <h3>Co potřebujeme od IT — teď</h3>
+            <p class="gray" style="margin-bottom:12px;">4 věci. Nic z toho se nenapojuje na firemní servery. IT (Dalibora) zapojíme až s funkčním prototypem.</p>
+            <div class="tool-row"><div><div class="tool-name" style="font-size:0.88rem;">Cursor</div><div class="tool-desc">Povolit instalaci na 3–5 PC. Desktop app, nulový přístup k serveru.</div></div><div style="font-size:0.72rem;color:var(--red);font-weight:700;">HNED</div></div>
+            <div class="tool-row"><div><div class="tool-name" style="font-size:0.88rem;">GitHub org</div><div class="tool-desc">Založit "vitar-group". Webový nástroj, není na serveru.</div></div><div style="font-size:0.72rem;color:var(--red);font-weight:700;">HNED</div></div>
+            <div class="tool-row"><div><div class="tool-name" style="font-size:0.88rem;">Webové služby</div><div class="tool-desc">Vercel, Neon, Firebase. Testovací, oddělené od firemního.</div></div><div style="font-size:0.72rem;color:var(--orange);font-weight:700;">BŘEZEN</div></div>
+            <div class="tool-row"><div><div class="tool-name" style="font-size:0.88rem;">Admin práva</div><div class="tool-desc">Pro Tier 1 vývojáře — instalace Cursor, terminál. Jen na dev strojích.</div></div><div style="font-size:0.72rem;color:var(--orange);font-weight:700;">BŘEZEN</div></div>
+
+            <h3>Prvních 30 dní</h3>
+            <div class="timeline-item"><div class="timeline-date">17.3.</div><div class="timeline-text"><strong>Digi meeting</strong> — schválit framework, role, IT požadavky</div></div>
+            <div class="timeline-item"><div class="timeline-date">17.3.</div><div class="timeline-text"><strong>Tomáš: Loom tutoriál</strong> — Cursor → GitHub → Code flow</div></div>
+            <div class="timeline-item"><div class="timeline-date">18.3.</div><div class="timeline-text"><strong>Dan: GitHub org</strong> "vitar-group" + private repos + pozvat tým</div></div>
+            <div class="timeline-item"><div class="timeline-date">18.3.</div><div class="timeline-text"><strong>Dan: testovací účty</strong> ai-devel@vitar.cz + Gemini, Artlist, Koda</div></div>
+            <div class="timeline-item"><div class="timeline-date">18.3.</div><div class="timeline-text"><strong>Teams kanál</strong> AI @ VITAR — připnout pravidla</div></div>
+            <div class="timeline-item"><div class="timeline-date">T3</div><div class="timeline-text"><strong>Tomáš: kontakt IT spec.</strong> od Kamila Škrobaly — part-time podpora</div></div>
+            <div class="timeline-item"><div class="timeline-date">T3</div><div class="timeline-text"><strong>Radim: AI Zlín</strong> — přihlásit se, Honza Vlk (AI obchodník)</div></div>
+            <div class="timeline-item"><div class="timeline-date">T3</div><div class="timeline-text"><strong>Rozhodnutí: kalkulačka</strong> — Lovable nebo Cursor?</div></div>
+            <div class="timeline-item"><div class="timeline-date">T3</div><div class="timeline-text"><strong>Workshop #1</strong> — 5–8 lidí, hands-on 2h</div></div>
+            <div class="timeline-item"><div class="timeline-date">31.3.</div><div class="timeline-text"><strong>IT schválí</strong> Cursor + GitHub pro Tier 1</div></div>
+            <div class="timeline-item"><div class="timeline-date">T4</div><div class="timeline-text"><strong>AI Morning Coffee #1</strong> — champion ukáže workflow</div></div>
+            <div class="timeline-item"><div class="timeline-date">T4</div><div class="timeline-text"><strong>Workshop #2</strong> — dalších 5–8 lidí</div></div>
+            <div class="timeline-item"><div class="timeline-date">11.4.</div><div class="timeline-text"><strong>AI Review #1</strong> — Tomáš + Radim + Juraj</div></div>
+
+            <div class="budget-box">
+                <div class="budget-number">~22 000 CZK/měs</div>
+                <div class="budget-label">za celou firmu (25 licencí)</div>
+                <div class="budget-roi">Pokud každý ušetří 2h týdně = <strong>200+ hodin měsíčně</strong>.<br>1 celý člověk na plný úvazek. Za cenu oběda na osobu.</div>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="module-section" id="faq">
+            <a class="back-link" onclick="showModule('overview')">← Přehled programu</a>
+            <h1>Často kladené otázky</h1>
+
+            <div class="card">
+                <h3 style="margin-top:0;">Můžu používat ChatGPT?</h3>
+                <p class="gray">Můžeš, ale nebude to nic moc. ChatGPT nevidí vaše soubory. Cursor ano. Rozdíl je v tom, že místo kopírování tam a zpátky AI pracuje přímo s vaším projektem.</p>
+            </div>
+            <div class="card">
+                <h3 style="margin-top:0;">Co když nevím, jestli můžu dát data do AI?</h3>
+                <p class="gray">Zeptej se v Teams kanálu AI @ VITAR. Pravidlo: pokud bys to nenapsal na firemní nástěnku, nedávej to do AI. Receptury, marže, mzdy = nikdy.</p>
+            </div>
+            <div class="card">
+                <h3 style="margin-top:0;">Musím umět programovat?</h3>
+                <p class="gray">Ne. Cursor umí generovat kód za tebe. Potřebuješ umět popsat, co chceš — a rozumět výsledku. Workshop tě naučí základy.</p>
+            </div>
+            <div class="card">
+                <h3 style="margin-top:0;">Kdo schvaluje nový AI nástroj?</h3>
+                <p class="gray">Přímý nadřízený (standard nástroje). Radim / IT (Cursor, vývojové nástroje). Tomáš (budget nad rámec). Juraj neschvaluje — ukazuje, jak na to.</p>
+            </div>
+            <div class="card">
+                <h3 style="margin-top:0;">Co je Future AI Leader?</h3>
+                <p class="gray">Externý program, kterým prochází Juraj. Struktura tohoto interního programu je jím inspirovaná. Víc na <a href="https://futureaileader.com" target="_blank" style="color:var(--accent);">futureaileader.com</a>.</p>
+            </div>
+        </div>
+
+        <div style="text-align:center;color:var(--muted);font-size:0.72rem;margin-top:40px;padding-top:24px;border-top:1px solid var(--border);">
+            AI @ VITAR · v3.0 · 16. březen 2026 · Zdroj: meeting 11.3.2026 + Future AI Leader
+        </div>
+    </div>
+
+    <script>
+        function showModule(id) {
+            document.querySelectorAll('.module-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.sidebar-item').forEach(s => s.classList.remove('active'));
+
+            document.getElementById(id).classList.add('active');
+
+            const map = { overview: 0, m1: 1, m2: 2, m3: 3, m4: 4, m5: 5, m6: 6, m7: 7, faq: 8 };
+            const items = document.querySelectorAll('.sidebar-item');
+            if (items[map[id]]) items[map[id]].classList.add('active');
+
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
