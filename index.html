@@ -807,6 +807,33 @@
                 <strong>Klíčový princíp:</strong> Cursor nikdy přímo na firemním serveru. Cursor → GitHub (kód). GitHub → Vercel (testování). Teprve po review → devel server → produkce. Data a kód jsou <strong>vždy oddělené</strong> až do fáze LIVE.
             </div>
 
+            <h3>Upřímně: jak to reálně ohlídat?</h3>
+
+            <div class="warn" style="padding:24px;">
+                <h3 style="color:var(--red);margin:0 0 10px;">Technicky to nejde zablokovat</h3>
+                <p style="font-size:0.88rem;margin-bottom:10px;">Cursor je desktop appka. Claude a Gemini jsou webové. Pokud má člověk přístup, <strong>technicky může vložit cokoliv</strong> — recepturu, marže, smlouvu. Žádný DLP filter to v reálném čase nechytí. To je realita, ne výmluva.</p>
+                <p style="font-size:0.88rem;margin:0;">Proto <strong>nespoléháme na technologickou bariéru</strong>, ale na tři věci:</p>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:0;">
+                <div class="flow-step" style="border-radius:10px 10px 0 0;">
+                    <div class="flow-num" style="background:var(--purple);">1</div>
+                    <div class="flow-text"><strong>Člověk to musí vědět.</strong> Proto školení, workshop, dvě kategorie. Každý, kdo dostane AI licenci, prošel 2h hands-on a ví, co je červená zóna. Neříkáme „nesmíš" — říkáme „víš proč ne."</div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-num" style="background:var(--blue);">2</div>
+                    <div class="flow-text"><strong>Prostředí to musí ztížit.</strong> Cursor na dev strojích <strong>nemá přístup k firemním složkám</strong> (síťové disky, SharePoint sync, sdílené složky). Pracuje jen s lokálním projektem. Sandbox = oddělený od firemního prostředí. Pokud někdo chce napojit firemní data — musí to být vědomé rozhodnutí, ne nehoda.</div>
+                </div>
+                <div class="flow-step" style="border-radius:0 0 10px 10px;">
+                    <div class="flow-num" style="background:var(--green);">3</div>
+                    <div class="flow-text"><strong>Proces to musí chytit.</strong> Scope dokument před vývojem. Code review před deployem. Radim sign-off před napojením na firemní DB. Tři bariéry — ne proto, aby brzdily, ale aby chytily to, co člověk přehlédne.</div>
+                </div>
+            </div>
+
+            <div class="highlight">
+                <strong>Analogie:</strong> Je to jako s firemní kartou. Technicky můžeš koupit cokoliv. Ale víš, co smíš a co ne. A je tam schvalovací proces pro větší částky. Stejný princíp — <strong>důvěra + pravidla + kontrola</strong>.
+            </div>
+
             <p class="gray" style="margin-top:16px;"><strong style="color:var(--text);">Nevíte?</strong> Zeptejte se v Teams kanálu AI @ VITAR. Lepší se zeptat než dát recepturu do AI.</p>
         </div>
 
