@@ -464,8 +464,8 @@
 <body>
 
     <div class="dl-btn-group">
-        <a href="AI-PROGRAM.md" download class="dl-btn">⬇ Program .md</a>
-        <a href="EU-RESEARCH.md" download class="dl-btn" style="background:var(--purple);color:#fff;">⬇ EU Research .md</a>
+        <a href="#" onclick="downloadFile('AI-PROGRAM.md');return false;" class="dl-btn">⬇ Program .md</a>
+        <a href="#" onclick="downloadFile('EU-RESEARCH.md');return false;" class="dl-btn" style="background:var(--purple);color:#fff;">⬇ EU Research .md</a>
     </div>
 
     <!-- SIDEBAR -->
@@ -1342,6 +1342,21 @@
     </div>
 
     <script>
+        function downloadFile(filename) {
+            fetch(filename)
+                .then(r => r.blob())
+                .then(blob => {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                });
+        }
+
         function showModule(id) {
             document.querySelectorAll('.module-section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.sidebar-item').forEach(s => s.classList.remove('active'));
